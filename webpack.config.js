@@ -3,7 +3,6 @@ var webpack = require('webpack');
 var merge = require('merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
 var webpackConfig = {
   output: {
     path: path.join(__dirname, 'dist'),
@@ -23,9 +22,6 @@ if (process.env.NODE_ENV === 'production') {
     entry : [
       './src/client/index.js'
     ],
-    resolve: {
-      extensions: ["", ".js", ".jsx"]
-    },
     module: {
       loaders: [{
         test: /\.js$/,
@@ -90,11 +86,8 @@ if (process.env.NODE_ENV === 'production') {
     ]},
     entry : [
       'webpack-hot-middleware/client',
-      './src/client/index.js',
+      './src/client/index.js'
     ],
-    resolve: {
-      extensions: ["", ".js", ".jsx"]
-    },
     plugins : [
       new webpack.HotModuleReplacementPlugin(),
       new ExtractTextPlugin("app.css")

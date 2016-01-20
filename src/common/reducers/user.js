@@ -1,7 +1,6 @@
 import { GET_USER, LOGIN_SUCCESS } from '../actions/user';
 
 export default function user(state = {username: '', logged: false}, action) {
-  console.log(action);
   switch (action.type) {
   case GET_USER:
     return state;

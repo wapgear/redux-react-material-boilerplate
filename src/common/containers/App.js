@@ -39,10 +39,8 @@ class App extends Component {
     return (
       <div>
         <Header/>
-          <main>
           {!this.props.children && <Home />}
           {this.props.children}
-          </main>
       </div>
     );
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 // Exported from redux-devtools
 import { createDevTools } from 'redux-devtools';
@@ -14,10 +14,11 @@ const DevTools = createDevTools(
   // Here, we put LogMonitor inside a DockMonitor.
   <DockMonitor toggleVisibilityKey='ctrl-h'
                changePositionKey='ctrl-q'
-               defaultSize='1'
-               fluid='true'>
+               defaultSize={1}
+               fluid={true}>
     <LogMonitor theme='tomorrow' />
   </DockMonitor>
 );
+
 
 export default DevTools;
