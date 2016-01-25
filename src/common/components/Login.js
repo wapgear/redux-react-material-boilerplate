@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import Helmet from 'react-helmet'
 
 
 class Login extends Component {
@@ -19,6 +20,7 @@ class Login extends Component {
     const { username, logged, err, token, password } = this.props;
     return (
     	<form className="login" onSubmit={this.onSubmit} >
+          <Helmet title="Login page"/>
         123
           <div><label>Login <input type="text" {...username} onChange="" /></label></div>
           <div><label>Password <input type="password" {...password} /></label></div>

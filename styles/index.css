@@ -1,1 +1,11 @@
-@import 'https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,100,300,300italic,100italic&subset=latin,cyrillic-ext,cyrillic';
+html{
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+body{
+    margin:0px;
+}
+
+a{
+    text-decoration: none;
+}

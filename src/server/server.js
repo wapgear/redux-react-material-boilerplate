@@ -18,16 +18,22 @@ import { getUser } from '../common/api/user';
 import routes from '../common/routes';
 import packagejson from '../../package.json';
 
+import Helmet from 'react-helmet';
+
+
 
 const app = express();
-const renderFullPage = (html, initialState) => {
+
+
+const renderFullPage = (html, initialState, head) => {
   return `
     <!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
-        <title>Isomorphic Redux Example</title>
+        <title>${head.title}</title>
         <link rel="stylesheet" type="text/css" href="/static/app.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
       </head>
       <body>
           <div id="root">${html}</div>
@@ -73,8 +79,10 @@ app.get('/*', function (req, res) {
         fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
           .then(html => {
             const componentHTML = ReactDOMServer.renderToString(InitialView);
+
             const initialState = store.getState();
-            res.status(200).end(renderFullPage(componentHTML,initialState));
+            let head = Helmet.rewind();
+            res.status(200).end(renderFullPage(componentHTML,initialState, head));
           })
           .catch(err => {
             console.log(err);
@@ -88,7 +96,6 @@ app.get('/*', function (req, res) {
 });
 
 const server = app.listen(3002, function () {
-  const host = server.address().address;
   const port = server.address().port;
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log('Example app listening at http://localhost:%s', port);
 });
