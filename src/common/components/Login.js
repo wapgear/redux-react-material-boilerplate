@@ -1,5 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import TextField from 'material-ui/lib/text-field';
+import RaisedButton from 'material-ui/lib/raised-button';
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+
+import {reduxForm} from 'redux-form';
 import Helmet from 'react-helmet'
+import * as UserActions from '../actions/user';
 
 
 class Login extends Component {
@@ -9,23 +16,40 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        if(nextProps.user.logged){
+            console.log('Ti avtorizovan, chert ti ebanij');
+        }
+    }
+
   onSubmit(event) {
     event.preventDefault();
-    console.log(event.target);
-    console.log(this.props);
-    this.props.auth(this.props.username, this.props.password);
+    const login = this.refs.login.getValue();
+    const password = this.refs.password.getValue();
+    this.props.auth(login,password);
+    console.log(`Login: ${login} Password: ${password}`);
   }
 
   render() {
-    const { username, logged, err, token, password } = this.props;
+      console.log(this.props.user);
     return (
-    	<form className="login" onSubmit={this.onSubmit} >
+    	<form style={{textAlign:'center'}} className="login" onSubmit={this.onSubmit}>
           <Helmet title="Login page"/>
-        123
-          <div><label>Login <input type="text" {...username} onChange="" /></label></div>
-          <div><label>Password <input type="password" {...password} /></label></div>
-          <div><input type="submit" value="Login" /></div>
-  		</form>
+            <TextField
+                style={{textAlign:'left'}}
+                ref="login"
+                hintText="Enter your login"
+                floatingLabelText="Login"
+                errorText={this.props.user.error}/><br/>
+            <TextField
+                ref="password"
+                hintText="Enter your password"
+                floatingLabelText="Password"
+                type="password"
+                errorText={this.props.user.error}/><br/>
+            <RaisedButton label="Login" secondary={true} onClick={this.onSubmit} onTouchTap={this.onSubmit}/>
+        </form>
     );
   }
 }
@@ -38,5 +62,15 @@ Login.propTypes = {
   err: PropTypes.object
 };
 
+function mapStateToProps(state) {
+    return {
+        user : state.user
+    };
+}
 
-export default Login;
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(UserActions,dispatch);
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

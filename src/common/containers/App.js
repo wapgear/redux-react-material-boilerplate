@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-import * as UserActions from '../actions/user';
 import * as LayoutActions from '../actions/layout';
+import * as UserActions from '../actions/user';
 import Helmet from 'react-helmet';
 import Home from '../components/Home'
 import Header from '../components/layout/Header'
@@ -17,6 +17,12 @@ class App extends Component {
     this.eventToggleSidebar = this.eventToggleSidebar.bind(this)
     this.eventUndo = this.eventUndo.bind(this)
     this.eventRedo = this.eventRedo.bind(this)
+  }
+
+  componentWillReceiveProps(nextState) {
+    if(nextState.user.token && !nextState.user.info) {
+      this.props.getUserInfo(nextState.user);
+    }
   }
 
   eventToggleSidebar(e) {
@@ -65,7 +71,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(LayoutActions,dispatch);
+  return bindActionCreators(Object.assign({}, LayoutActions, UserActions), dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

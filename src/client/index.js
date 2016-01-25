@@ -11,6 +11,7 @@ import routes from '../common/routes';
 
 import "../../styles/index.css";
 
+
 const history = createBrowserHistory();
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
