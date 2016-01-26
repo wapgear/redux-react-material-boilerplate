@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
+import request from 'axios';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import classNames from 'classnames';
@@ -9,6 +10,8 @@ import Helmet from 'react-helmet';
 import Home from '../components/Home'
 import Header from '../components/layout/Header'
 import Paper from 'material-ui/lib/paper';
+import cookie from 'react-cookie';
+
 
 class App extends Component {
 
@@ -20,6 +23,10 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextState) {
+    if(nextState.user.token && !cookie.load('token')) {
+      console.log('Setting up token in cookie');
+      cookie.save('token', nextState.user.token);
+    }
     if(nextState.user.token && !nextState.user.info) {
       this.props.getUserInfo(nextState.user);
     }

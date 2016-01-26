@@ -5,7 +5,7 @@
   "scripts": {
     "slate": "rm -rf node_modules && npm install",
     "clean": "rm -rf dist",
-    "start": "set NODE_ENV=development && node src/server/index.js --progress --colors --profile",
+    "start": "set NODE_ENV=development && node src/server/index.js --colors --profile",
     "start-prod": "set NODE_ENV=production && node src/server/index.js --progress --colors --profile",
     "build": "npm run clean && set NODE_ENV=production && webpack -p --progress --colors --profile",
     "test": "set NODE_ENV=test && mocha --compilers js:babel-core/register --recursive"
@@ -31,6 +31,7 @@
     "react-addons-pure-render-mixin": "^0.14.6",
     "react-addons-transition-group": "^0.14.6",
     "react-addons-update": "^0.14.6",
+    "react-cookie": "^0.4.3",
     "react-dom": "^0.14.6",
     "react-helmet": "^2.3.1",
     "react-redux": "^4.0.0",

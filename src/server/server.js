@@ -17,9 +17,10 @@ import configureStore from '../common/store/configureStore';
 import { getUser } from '../common/api/user';
 import routes from '../common/routes';
 import packagejson from '../../package.json';
-
 import Helmet from 'react-helmet';
 
+import {connect} from 'react-redux';
+import {getUserInfo} from '../common/actions/user';
 
 
 const app = express();
@@ -56,10 +57,19 @@ if(process.env.NODE_ENV !== 'production'){
 
 app.use(cookieParser());
 
+app.use(function(req, res, next) {
+  GLOBAL.navigator = {
+    userAgent: req.headers['user-agent']
+  }
+  next();
+});
+
 app.get('/*', function (req, res) {
   const location = createLocation(req.url);
+
   getUser(req.cookies.token || false, user => {
-      match({ routes, location }, (err, redirectLocation, renderProps) => {
+    // console.log(user);
+    match({ routes, location }, (err, redirectLocation, renderProps) => {
 
         if(err) {
           console.error(err);
@@ -68,7 +78,22 @@ app.get('/*', function (req, res) {
         if(!renderProps) {
           return res.status(404).end('Not found');
         }
-        const store = configureStore({version : packagejson.version});
+
+      var store = null;
+      if(user) {
+        console.log('Insert with user information')
+        store = configureStore({
+          version: packagejson.version,
+          user: {
+            userId: user.id,
+            info: user,
+            token: req.cookies.token
+          }
+        });
+      }else{
+        console.log('Inser info without user')
+        store = configureStore({version: packagejson.version});
+      }
         const InitialView = (
           <Provider store={store}>
               <RoutingContext {...renderProps} />
@@ -79,7 +104,6 @@ app.get('/*', function (req, res) {
         fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
           .then(html => {
             const componentHTML = ReactDOMServer.renderToString(InitialView);
-
             const initialState = store.getState();
             let head = Helmet.rewind();
             res.status(200).end(renderFullPage(componentHTML,initialState, head));
