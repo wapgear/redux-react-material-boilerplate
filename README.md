@@ -74,11 +74,3 @@ You need to put token into cookie with name 'token' and check it into file via a
 Based on https://github.com/caljrimmer/isomorphic-redux-app
 
 Theme by Material UI Lib https://github.com/callemall/material-ui
-
-## Other Boilerplate code
-
-[Portfolio Redux App](https://github.com/caljrimmer/portfolio-redux-app)
-
-## Credit
-
-App template was based on [Lanyon Theme](https://github.com/poole/lanyon) by [mdo](https://github.com/mdo)
