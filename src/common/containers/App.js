@@ -30,6 +30,11 @@ class App extends Component {
     if(nextState.user.token && !nextState.user.info) {
       this.props.getUserInfo(nextState.user);
     }
+
+    if(nextState.user.clearCookie && cookie.load('token')) {
+      cookie.remove('token');
+      this.props.toogleClearCookie();
+    }
   }
 
   eventToggleSidebar(e) {
