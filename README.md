@@ -4,7 +4,11 @@
 
 This project serves as a **simple** boilerplate to start building an isomorphic rendering application in React and Redux.
 
+<<<<<<< HEAD
 <img src="https://habrastorage.org/files/b75/ae3/93e/b75ae393eb274caa992cc7f313dff23d.png" width="800"/>
+=======
+<img src="http://g.recordit.co/iChc7ZH3H1.gif" width="728" />
+>>>>>>> 900cdeb729e78835c5e93cca9a1a87248148e70d
 
 # Features
 
@@ -26,7 +30,10 @@ This project serves as a **simple** boilerplate to start building an isomorphic 
 - Redux
 - Redux-DevTools
 - Babel
+<<<<<<< HEAD
 - Material UI
+=======
+>>>>>>> 900cdeb729e78835c5e93cca9a1a87248148e70d
 
 ## Development Installation
 
@@ -65,6 +72,7 @@ http://localhost:3002
 npm test
 ```
 
+<<<<<<< HEAD
 ## Auth
 Look at /src/common/api/user.js
 
@@ -75,3 +83,12 @@ You need to put token into cookie with name 'token' and check it into file via a
 Based on https://github.com/caljrimmer/isomorphic-redux-app
 
 Theme by Material UI Lib https://github.com/callemall/material-ui
+=======
+## Other Boilerplate code
+
+[Portfolio Redux App](https://github.com/caljrimmer/portfolio-redux-app)
+
+## Credit
+
+App template was based on [Lanyon Theme](https://github.com/poole/lanyon) by [mdo](https://github.com/mdo)
+>>>>>>> 900cdeb729e78835c5e93cca9a1a87248148e70d

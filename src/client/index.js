@@ -16,7 +16,8 @@ const history = createBrowserHistory();
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
 const rootElement = document.getElementById('root');
-
+console.log(`suck it:`);
+console.log(routes);
 ReactDOM.render(
   <Provider store={store}>
         <ReduxRouter>
